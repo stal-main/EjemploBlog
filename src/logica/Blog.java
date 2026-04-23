@@ -30,7 +30,7 @@ private static int consecutivo = 1;
 		
 		fechaCreacion = LocalDateTime.now();
 		
-		publicaciones = new TreeMap<integer, Publicacion>();
+		publicaciones = new TreeMap<Integer, Publicacion>();
 	}
 
 	public String getNombre() {
@@ -64,6 +64,13 @@ private static int consecutivo = 1;
 		publicaciones.put(p.getCodigo(), p);
 	}
 	
+	public void revisarPublicionExistente(int codigoPublicacion) throws Exception {
+		
+		if (!publicaciones.containsKey(codigoPublicacion)) {
+			throw new Exception("Codigo de publicacion no encontrado");
+		}		
+	}
+	
 	public String obtenerPublicacion(int codigoPublicacion) throws Exception {
 		
 		if (!publicaciones.containsKey(codigoPublicacion)) {
@@ -74,5 +81,33 @@ private static int consecutivo = 1;
 		
 		return p.toString();
 	}
-
+	
+	public Map<Integer, String> obtenerTitulosPublicacion() {
+		
+		Map<Integer, String> titulos = new TreeMap<Integer, String>();
+		
+		for (Publicacion p : publicaciones.values()) {
+			titulos.put(p.getCodigo(), p.getTitulo());
+		}
+		
+		return titulos;
+	}
+	
+	public void agregarComentario(int codigoPublicacion, String email, String ip, String texto) throws Exception {
+		
+		revisarPublicionExistente(codigoPublicacion);
+		
+		Publicacion p = publicaciones.get(codigoPublicacion);
+		
+		p.agregarComentario(email, ip, texto);
+	}
+	
+	public void borrarComentario(int codigoPublicacion, int posicion) throws Exception {
+		
+		revisarPublicionExistente(codigoPublicacion);
+		
+		Publicacion p = publicaciones.get(codigoPublicacion);
+		
+		p.borrarComentario(posicion);	
+	}	
 }

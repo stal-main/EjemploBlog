@@ -1,6 +1,8 @@
 package logica;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Publicacion {
 	
@@ -82,8 +84,22 @@ public class Publicacion {
 				resultado += c.toString() + "\n\n";
 			}
 		}
+		return resultado;
 	}
 	
-	public void agregarComentario(String)
+	public void agregarComentario(String email, String ip, String texto) {
+		
+		Comentario c = new Comentario(email, ip, texto);
+		
+		comentarios.add(c);
+	}
 	
+	public void borrarComentario(int posicion) throws Exception {
+		
+		if (posicion < 0 || posicion >= comentarios.size()) {
+			throw new Exception("Comentario no valido");
+		}
+		
+		comentarios.remove(posicion);	
+	}	
 }

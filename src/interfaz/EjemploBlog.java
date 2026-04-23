@@ -12,7 +12,7 @@ public class EjemploBlog {
 
 	public static void main(String[] args) {
 
-
+		controladora = new Controladora();
 
 	}
 
