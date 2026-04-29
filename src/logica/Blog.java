@@ -63,8 +63,7 @@ private static int consecutivo = 1;
 		
 		publicaciones.put(p.getCodigo(), p);
 	}
-	
-	public void revisarPublicionExistente(int codigoPublicacion) throws Exception {
+	private void revisarPublicionExistente(int codigoPublicacion) throws Exception {
 		
 		if (!publicaciones.containsKey(codigoPublicacion)) {
 			throw new Exception("Codigo de publicacion no encontrado");
@@ -73,10 +72,8 @@ private static int consecutivo = 1;
 	
 	public String obtenerPublicacion(int codigoPublicacion) throws Exception {
 		
-		if (!publicaciones.containsKey(codigoPublicacion)) {
-			throw new Exception("Codigo de publicacion no encontrado");
-		}
-		
+		revisarPublicionExistente(codigoPublicacion);
+			
 		Publicacion p = publicaciones.get(codigoPublicacion);
 		
 		return p.toString();
