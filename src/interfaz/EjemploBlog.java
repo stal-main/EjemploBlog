@@ -11,7 +11,7 @@ public class EjemploBlog {
 	
 	private static Scanner scanner;
 	
-	public static void menuPublicacion () {
+	public static void menuPublicacion (int codigoBlog) {
 		
 		boolean salir = false;
 		
@@ -33,11 +33,41 @@ public class EjemploBlog {
 			
 			switch (opcion) {
 			
-			
-			}
-			
-		}
-		
+			case 1:
+				
+				try {
+					
+					Map<Integer, String> publicaciones = controladora.obtenerPublicaciones(codigoBlog);
+					
+					if (publicaciones.isEmpty()) {
+						
+						System.out.println("No hay publicaciones en este blog.");
+					}
+					
+					else {
+						
+						System.out.println("Publicaciones");
+						
+						for (Map.Entry<Integer, String> entrada : publicaciones.entrySet()) {
+							
+							System.out.println("[" + entrada.getKey() + "] " + entrada.getValue());
+						}
+						
+						System.out.print("Ingrese el codigo para ver el contenido: ");
+						
+						int codigoVer = leerEntero();
+						
+						String contenido = controladora.obtenerPublicacion(codigoBlog, codigoVer);
+                        System.out.println("\n" + contenido);
+					}
+				}
+				
+				catch (Exception e) {
+					
+					System.out.println("Error: " + e.getMessage());	
+				}							
+			}			
+		}		
 	}
 	
 	public static void menuComentario(int codigoBlog, int codigoPublicacion) {
@@ -85,6 +115,8 @@ public class EjemploBlog {
 	public static void main(String[] args) {
 
 		controladora = new Controladora();
+		
+		scanner = new Scanner(System.in);
 		
 		boolean salir = false;
 		
