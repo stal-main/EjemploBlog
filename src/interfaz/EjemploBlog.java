@@ -31,9 +31,9 @@ public class EjemploBlog {
 			
 			int opcion = leerEntero();
 			
-			switch (opcion) {
+
 			
-			case 1:
+			if (opcion == 1) {
 				
 				try {
 					
@@ -46,7 +46,7 @@ public class EjemploBlog {
 					
 					else {
 						
-						System.out.println("Publicaciones");
+						System.out.println("-Publicaciones-");
 						
 						for (Map.Entry<Integer, String> entrada : publicaciones.entrySet()) {
 							
@@ -66,7 +66,24 @@ public class EjemploBlog {
 					
 					System.out.println("Error: " + e.getMessage());	
 				}							
-			}			
+			}	
+			
+			else if (opcion == 2) {
+				
+			}
+			
+			else if (opcion == 3) {
+				
+			}
+			
+			else if (opcion == 4) {
+				
+				salir = true;
+			}
+			
+			else {
+            System.out.println("Opcion no valida. Escoja entre 1 y 4.");
+			}
 		}		
 	}
 	
@@ -88,9 +105,11 @@ public class EjemploBlog {
 			
 			int opcion = leerEntero();
 			
-			switch (opcion) {
-		
+			if (opcion == 1) {
+				
 			}
+			
+
 		}
 		
 	}
@@ -111,6 +130,20 @@ public class EjemploBlog {
 		
 		return valor;
 	}
+	
+	private static String leerTexto() {
+		 
+        String valor = "";
+ 
+        while (valor.isEmpty()) {
+            valor = scanner.nextLine().trim();
+            if (valor.isEmpty()) {
+                System.out.print("El campo no puede estar vacio. Intente de nuevo: ");
+            }
+        }
+ 
+        return valor;
+    }
 
 	public static void main(String[] args) {
 
@@ -136,9 +169,39 @@ public class EjemploBlog {
 			
 			int opcion = leerEntero();
 			
-			switch (opcion) {
-			
+			if (opcion == 1) {
+				
+				Map<Integer, String> blogs = controladora.obtenerBlogs();
+				
+				if (blogs.isEmpty()) {
+					
+					System.out.println("No hay blogs registrados.");
+				}
+				
+				else {
+					
+					System.out.println("-Blogs-");
+					
+					for (Map.Entry<Integer, String> entrada : blogs.entrySet()) {
+						
+						System.out.println("[" + entrada.getKey() + "] " + entrada.getValue());
+					}
+				}
+				
 			}
+			
+			else if (opcion == 2) {
+				
+				System.out.print("Nombre del blog: ");
+                String nombre = leerTexto();
+ 
+                System.out.print("Descripcion del blog: ");
+                String descripcion = leerTexto();
+ 
+                controladora.crearBlog(nombre, descripcion);
+                System.out.println("Blog creado correctamente.");
+			}
+
 			
 		}
 
