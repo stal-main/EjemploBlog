@@ -33,27 +33,27 @@ private static int consecutivo = 1;
 		publicaciones = new TreeMap<Integer, Publicacion>();
 	}
 
-	public String getNombre() {
+	public String obtenerNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
+	public void actualizarNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
+	public String obtenerDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
+	public void actualizaDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
-	public int getCodigo() {
+	public int obtenerCodigo() {
 		return codigo;
 	}
 
-	public LocalDateTime getFechaCreacion() {
+	public LocalDateTime obtenerFechaCreacion() {
 		return fechaCreacion;
 	}
 	
@@ -61,7 +61,7 @@ private static int consecutivo = 1;
 		
 		Publicacion p = new Publicacion(titulo, texto, nombreCreador);
 		
-		publicaciones.put(p.getCodigo(), p);
+		publicaciones.put(p.obtenerCodigo(), p);
 	}
 	private void revisarPublicacionesExistentes(int codigoPublicacion) throws Exception {
 		
@@ -84,7 +84,7 @@ private static int consecutivo = 1;
 		Map<Integer, String> titulos = new TreeMap<Integer, String>();
 		
 		for (Publicacion p : publicaciones.values()) {
-			titulos.put(p.getCodigo(), p.getTitulo());
+			titulos.put(p.obtenerCodigo(), p.obtenerTitulo());
 		}
 		
 		return titulos;

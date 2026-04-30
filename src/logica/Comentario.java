@@ -30,17 +30,17 @@ public class Comentario {
 		return fechaCreacion;
 	}
 	
-	public String getEmail() {
+	public String obtenerEmail() {
 		
 		return email;
 	}
 	
-	public String getIp() {
+	public String obtenerIp() {
 		
 		return ip;
 	}
 	
-	public String getTexto() {
+	public String obtenerTexto() {
 		
 		return texto;
 	}

@@ -38,27 +38,27 @@ public class Publicacion {
 		
 	}
 	
-	public int getCodigo() {
+	public int obtenerCodigo() {
 		
 		return codigo;
 	}
 	
-	public String getTitulo() {
+	public String obtenerTitulo() {
 		
 		return titulo;
 	}
 	
-	public String getTexto() {
+	public String obtenerTexto() {
 		
 		return texto;
 	}
 	
-	public String getNombreCreador() {
+	public String obtenerNombreCreador() {
 		
 		return nombreCreador;
 	}
 	
-	public LocalDateTime getFechaPublicacion() {
+	public LocalDateTime obtenerFechaPublicacion() {
 		
 		return fechaPublicacion;
 	}

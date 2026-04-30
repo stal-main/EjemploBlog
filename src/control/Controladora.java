@@ -18,7 +18,7 @@ public class Controladora {
 		
 		Blog b = new Blog(nombre, descripcion);
 		
-		blogs.put(b.getCodigo(), b);
+		blogs.put(b.obtenerCodigo(), b);
 	}
 	
 	public void borrarBlog(int codigoBlog) throws Exception {
@@ -37,7 +37,7 @@ public class Controladora {
 		
 		for (Blog b : blogs.values()) {
 			
-			resultado.put(b.getCodigo(), b.getNombre());
+			resultado.put(b.obtenerCodigo(), b.obtenerNombre());
 		}
 		
 		return resultado;
@@ -53,7 +53,9 @@ public class Controladora {
 		Blog b = blogs.get(codigoBlog);
 		
 		b.crearPublicacion(titulo, texto, nombre);
-		
+	}
+	
+	public Map<Integer, String> obtenerPublicaciones(codigoBlog) {
 		
 	}
 }
