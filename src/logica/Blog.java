@@ -45,7 +45,7 @@ private static int consecutivo = 1;
 		return descripcion;
 	}
 
-	public void actualizaDescripcion(String descripcion) {
+	public void actualizarDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 

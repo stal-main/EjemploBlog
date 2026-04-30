@@ -53,12 +53,25 @@ public class EjemploBlog {
 							System.out.println("[" + entrada.getKey() + "] " + entrada.getValue());
 						}
 						
-						System.out.print("Ingrese el codigo para ver el contenido: ");
+						System.out.print("Ingrese el codigo para ver el contenido(0 para cancelar): ");
 						
 						int codigoVer = leerEntero();
 						
-						String contenido = controladora.obtenerPublicacion(codigoBlog, codigoVer);
-                        System.out.println("\n" + contenido);
+						if (codigoVer != 0) {
+							
+							try {
+								
+								String contenido = controladora.obtenerPublicacion(codigoBlog, codigoVer);
+		                        
+								System.out.println("\n" + contenido);
+								
+							}
+							
+							catch (Exception e) {
+								
+								System.out.println("Error: " + e.getMessage());	
+							}													
+						}
 					}
 				}
 				
@@ -70,10 +83,58 @@ public class EjemploBlog {
 			
 			else if (opcion == 2) {
 				
+				System.out.print("Titulo: ");
+				
+                String titulo = leerTexto();
+ 
+                System.out.print("Texto: ");
+                
+                String texto = leerTexto();
+ 
+                System.out.print("Nombre del creador: ");
+                
+                String nombreCreador = leerTexto();
+ 
+                try {
+                	
+                    controladora.crearPublicacion(codigoBlog, titulo, texto, nombreCreador);
+                    
+                    System.out.println("Publicacion creada correctamente.");
+                } 
+                
+                catch (Exception e) {
+                	
+                    System.out.println("Error: " + e.getMessage());
+                }				
 			}
 			
 			else if (opcion == 3) {
 				
+				try {
+				
+					Map<Integer, String> publicaciones = controladora.obtenerPublicaciones(codigoBlog);
+					
+					if (publicaciones.isEmpty()) {
+						
+						System.out.println("No hay publicaciones en este blog.");
+					}
+					
+					
+					else {
+					
+						System.out.print("Codigo de la publicacion: ");
+						
+		                int codigoComentario = leerEntero();
+		                
+		                menuComentario(codigoBlog, codigoComentario);
+		                
+					}
+				}	
+				
+				catch (Exception e) {
+						
+						System.out.println("Error: " + e.getMessage());	
+				}											
 			}
 			
 			else if (opcion == 4) {
@@ -82,7 +143,8 @@ public class EjemploBlog {
 			}
 			
 			else {
-            System.out.println("Opcion no valida. Escoja entre 1 y 4.");
+				
+				System.out.println("Opcion no valida. Escoja entre 1 y 4.");
 			}
 		}		
 	}
@@ -107,26 +169,102 @@ public class EjemploBlog {
 			
 			if (opcion == 1) {
 				
+				System.out.print("Email: ");
+				
+                String email = leerTexto();
+ 
+                System.out.print("IP: ");
+                
+                String ip = leerTexto();
+ 
+                System.out.print("Texto del comentario: ");
+                
+                String textoComentario = leerTexto();
+                
+                try {
+                	
+                	controladora.agregarComentario(codigoBlog, codigoPublicacion, email, ip, textoComentario);
+                	
+                	System.out.println("Comentario agregado");
+                }
+                
+                catch (Exception e) {
+                	
+                	System.out.println("Error: " + e.getMessage());
+                }				
 			}
 			
+			else if (opcion == 2) {
+				
+				try {
+					
+					String contenido = controladora.obtenerPublicacion(codigoBlog, codigoPublicacion);
+					
+					System.out.println("\n" + contenido);
+					
+					if (contenido.contains("No hay comentario")) {
+						
+						System.out.println("Esta publicacion no tiene comentarios para borrar.");
+					}
+					
+					else {
+						
+						System.out.print("Numero de posicion del comentario (inicia en 0): ");
+						
+						int posicion = leerEntero();
 
-		}
-		
+						try {
+							
+							controladora.borrarComentario(codigoBlog, codigoPublicacion, posicion);
+							
+							System.out.println("Comentario borrado.");
+						} 
+						
+						catch (Exception e) {
+							
+							System.out.println("Error: " + e.getMessage());
+						}
+					}
+				}
+				
+				catch (Exception e) {
+					
+					System.out.println("Error: " + e.getMessage());
+				}
+			} 
+			
+			else if (opcion == 3) {
+				
+				salir = true;
+			}
+			
+			else {
+				
+				System.out.println("Opcion no valida. Escoja entre 1 y 3.");
+			}
+		}		
 	}
 	
 	private static int leerEntero() {
 		
 		int valor = 0;
 		
-		try {
-			
-			valor = Integer.parseInt(scanner.nextLine().trim());			
-		}
+		boolean valido = false;
 		
-		catch (NumberFormatException e) {
+		while (!valido) {
 			
-			System.out.println("Entrada no valida");
-		}
+			try {
+				
+				valor = Integer.parseInt(scanner.nextLine().trim());	
+				
+				valido = true;
+			}
+			
+			catch (NumberFormatException e) {
+				
+				System.out.println("Entrada no valida. Ingrese un numero valido:");
+			}						
+		}				
 		
 		return valor;
 	}
@@ -186,8 +324,7 @@ public class EjemploBlog {
 						
 						System.out.println("[" + entrada.getKey() + "] " + entrada.getValue());
 					}
-				}
-				
+				}				
 			}
 			
 			else if (opcion == 2) {
