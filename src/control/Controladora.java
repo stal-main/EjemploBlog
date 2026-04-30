@@ -14,7 +14,7 @@ public class Controladora {
 		blogs = new TreeMap<Integer, Blog>();
 	}
 	
-	public void crearBrog(String nombre, String descripcion) {
+	public void crearBlog(String nombre, String descripcion) {
 		
 		Blog b = new Blog(nombre, descripcion);
 		

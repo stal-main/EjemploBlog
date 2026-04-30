@@ -63,7 +63,7 @@ private static int consecutivo = 1;
 		
 		publicaciones.put(p.getCodigo(), p);
 	}
-	private void revisarPublicionExistente(int codigoPublicacion) throws Exception {
+	private void revisarPublicacionesExistentes(int codigoPublicacion) throws Exception {
 		
 		if (!publicaciones.containsKey(codigoPublicacion)) {
 			throw new Exception("Codigo de publicacion no encontrado");
@@ -72,14 +72,14 @@ private static int consecutivo = 1;
 	
 	public String obtenerPublicacion(int codigoPublicacion) throws Exception {
 		
-		revisarPublicionExistente(codigoPublicacion);
+		revisarPublicacionesExistentes(codigoPublicacion);
 			
 		Publicacion p = publicaciones.get(codigoPublicacion);
 		
 		return p.toString();
 	}
 	
-	public Map<Integer, String> obtenerTitulosPublicacion() {
+	public Map<Integer, String> obtenerTitulosPublicaciones() {
 		
 		Map<Integer, String> titulos = new TreeMap<Integer, String>();
 		
@@ -92,7 +92,7 @@ private static int consecutivo = 1;
 	
 	public void agregarComentario(int codigoPublicacion, String email, String ip, String texto) throws Exception {
 		
-		revisarPublicionExistente(codigoPublicacion);
+		revisarPublicacionesExistentes(codigoPublicacion);
 		
 		Publicacion p = publicaciones.get(codigoPublicacion);
 		
@@ -101,7 +101,7 @@ private static int consecutivo = 1;
 	
 	public void borrarComentario(int codigoPublicacion, int posicion) throws Exception {
 		
-		revisarPublicionExistente(codigoPublicacion);
+		revisarPublicacionesExistentes(codigoPublicacion);
 		
 		Publicacion p = publicaciones.get(codigoPublicacion);
 		
