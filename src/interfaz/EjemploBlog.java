@@ -17,17 +17,17 @@ public class EjemploBlog {
 		
 		while (!salir) {
 			
-			System.out.println("Menu Publicaciones");
+			System.out.println("\nMenu Publicaciones");
 			
-			System.out.println("Opciones:");
+			System.out.println("\nOpciones");
 			
-			System.out.println("1) Ver publicaciones");
+			System.out.println("\n1) Ver publicaciones");
 			System.out.println("2) Crear publicaciones");
 			System.out.println("3) Administrar comentarios");
 			System.out.println("4) Regresar");
 
 			
-			System.out.println("Seleccione una opcion: ");
+			System.out.println("\nSeleccione una opcion: ");
 			
 			int opcion = leerEntero();
 			
@@ -93,15 +93,15 @@ public class EjemploBlog {
 		
 		while (!salir) {
 			
-			System.out.println("Menu Comentarios");
+			System.out.println("\nMenu Comentarios");
 			
-			System.out.println("Opciones:");
+			System.out.println("\nOpciones");
 			
-			System.out.println("1) Agregar comentario");
+			System.out.println("\n1) Agregar comentario");
 			System.out.println("2) Borrar comentario");
 			System.out.println("3) Regresar");
 			
-			System.out.println("Seleccione una opcion: ");
+			System.out.println("\nSeleccione una opcion: ");
 			
 			int opcion = leerEntero();
 			
@@ -155,17 +155,17 @@ public class EjemploBlog {
 		
 		while (!salir) {
 			
-			System.out.println("TECtagram"); //que horrendo nombre
+			System.out.println("\nTECtagram"); //que horrendo nombre
 			
-			System.out.println("Opciones:");
+			System.out.println("\nOpciones");
 			
-			System.out.println("1) Ver blogs");
+			System.out.println("\n1) Ver blogs");
 			System.out.println("2) Crear blog");
 			System.out.println("3) Borrar blog");
 			System.out.println("4) Seleccionar blog");
 			System.out.println("5) Salir");
 			
-			System.out.println("Seleccione una opcion: ");
+			System.out.println("\nSeleccione una opcion: ");
 			
 			int opcion = leerEntero();
 			
@@ -193,18 +193,90 @@ public class EjemploBlog {
 			else if (opcion == 2) {
 				
 				System.out.print("Nombre del blog: ");
+				
                 String nombre = leerTexto();
  
                 System.out.print("Descripcion del blog: ");
+                
                 String descripcion = leerTexto();
  
                 controladora.crearBlog(nombre, descripcion);
+                
                 System.out.println("Blog creado correctamente.");
 			}
-
 			
+			else if (opcion == 3) {
+				
+				Map<Integer, String> blogs = controladora.obtenerBlogs();
+				
+				if (blogs.isEmpty()) {
+					
+					System.out.println("No hay blogs registrados.");
+				}
+				
+				else {
+				
+					System.out.print("Codigo del blog a borrar: ");
+	            
+					int codigoBorrar = leerEntero();
+	
+	            	try {
+	            		
+	            		controladora.borrarBlog(codigoBorrar);
+	            		
+	            		System.out.println("Blog borrado correctamente.");
+	            	} 
+	            	
+	            	catch (Exception e) {
+	            		
+	            		System.out.println("Error: " + e.getMessage());
+	            	}
+				}
+
+			} 
+			
+			else if (opcion == 4) {
+				
+				Map<Integer, String> blogs = controladora.obtenerBlogs();
+				
+				if (blogs.isEmpty()) {
+					
+					System.out.println("No hay blogs registrados.");
+				}
+				
+				else {
+				
+					System.out.print("Codigo del blog a seleccionar: ");
+					
+					int codigoSeleccionar = leerEntero();
+	
+					Map<Integer, String> blogsDisponibles = controladora.obtenerBlogs();
+	
+					if (!blogsDisponibles.containsKey(codigoSeleccionar)) {
+						
+						System.out.println("Error: codigo de blog no valido.");
+					} 
+	            
+					else {
+	            	
+						menuPublicacion(codigoSeleccionar);
+					}
+				}
+			} 
+			
+			else if (opcion == 5) {
+				
+				salir = true;
+				
+				System.out.println("Hasta luego.");
+			} 
+			
+			else {
+				
+				System.out.println("Opcion no valida. Escoja entre 1 y 5.");
+			}			
 		}
-
+		
+		scanner.close();
 	}
-
 }
